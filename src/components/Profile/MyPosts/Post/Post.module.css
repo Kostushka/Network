@@ -1,0 +1,11 @@
+.item {
+  color: darkred;
+}
+.item img {
+  width: 50px;
+  border-radius: 50%;
+}
+.item span {
+  color: darkblue;
+  font-weight: bold;
+}

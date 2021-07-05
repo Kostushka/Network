@@ -1,0 +1,11 @@
+.dialogsItems {
+    padding: 20px;
+}
+.dialogsItem.active a {
+    color: darkgreen;
+}
+
+.dialogsItem.active a.dialogsItemLink {
+    color: firebrick;
+    text-decoration: none;
+}
