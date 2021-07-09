@@ -14,13 +14,18 @@ const Name = (props) => {
         );
     }
 
-    let nameElements = props.name.map((n) => {
+    let nameElements = props.name.nameData.map((n) => {
         return <DialogItem name={n.name} id={n.id}/>
+    });
+
+    let imgElements = props.name.imgData.map((n) => {
+        return <img className={s.imgItems} src={n.img} id={n.id}/>
     });
 
     return (
         <div className={s.dialogsItems}>
-            {nameElements}
+            <div>{imgElements}</div>
+            <div>{nameElements}</div>
         </div>
     );
 }

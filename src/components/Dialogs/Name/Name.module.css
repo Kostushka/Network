@@ -1,5 +1,11 @@
 .dialogsItems {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     padding: 20px;
+}
+.imgItems {
+    width: 40px;
+    border-radius: 50%;
 }
 .dialogsItem.active a {
     color: darkgreen;
