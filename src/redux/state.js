@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from "../render";
+
 let state = {
     profilePage: {
         postData: [
@@ -6,7 +8,8 @@ let state = {
             {id: 3, message: 'It is my second post', likeCount: '10'},
             {id: 4, message: 'It is my third post', likeCount: '0'},
             {id: 5, message: 'It is my fourth post', likeCount: '5'}
-        ]
+        ],
+        newPostText: ''
     },
     dialogsPage: {
         nameData: [
@@ -24,6 +27,7 @@ let state = {
             {id: 4, message: 'Good!'},
             {id: 5, message: 'Yes!'}
         ],
+        newMessageText: '',
         imgData: [
             {id:1, img: 'https://yt3.ggpht.com/a/AATXAJxK_mYx8XR2ySdDqO_DNrKKg0FGnlCq0Nj1t89Mmw=s900-c-k-c0xffffffff-no-rj-mo'},
             {id:2, img: 'https://im0-tub-ua.yandex.net/i?id=a4e263cd4ef749c5da5512138af270ae&n=13'},
@@ -41,4 +45,36 @@ let state = {
         ]
     }
 };
+
+export let addPost = () => {
+    let newPost = {
+        id: 5,
+        message: state.profilePage.newPostText,
+        likeCount: '0'
+    };
+    state.profilePage.postData.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+export let addMessage = () => {
+    let newMessage = {
+        id: 6,
+        message: state.dialogsPage.newMessageText
+    };
+    state.dialogsPage.messageData.push(newMessage);
+    state.dialogsPage.newMessageText = '';
+    rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export let updateNewMessageText = (newText) => {
+    state.dialogsPage.newMessageText = newText;
+    rerenderEntireTree(state);
+}
+
 export default state;
