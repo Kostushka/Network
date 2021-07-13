@@ -1,5 +1,6 @@
 import s from './Message.module.css';
 import React from "react";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../../redux/dialogs-reducer";
 
 const Message = (props) => {
     const MessageItem = (props) => {
@@ -12,15 +13,13 @@ const Message = (props) => {
         return <MessageItem message={m.message}/>
     });
 
-    let newMessageElement = React.createRef();
-
     let addMessage = () => {
-        props.addMessage();
+        props.dispatch(addMessageActionCreator());
     }
 
-    let onMessageChange = () => {
-        let text = newMessageElement.current.value;
-        props.updateNewMessageText(text);
+    let onMessageChange = (e) => {
+        let text = e.target.value;
+        props.dispatch(updateNewMessageTextActionCreator(text));
     }
 
     return (
@@ -28,7 +27,7 @@ const Message = (props) => {
             {messageElements}
             <div>
                 <div>
-                    <textarea ref={newMessageElement} onChange={onMessageChange} value={props.newMessageText}/>
+                    <textarea placeholder='Enter text' onChange={onMessageChange} value={props.newMessageText}/>
                 </div>
                 <div>
                     <button onClick={addMessage}>Add message</button>
