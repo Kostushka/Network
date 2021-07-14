@@ -7,7 +7,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
-import Sidebar from "./components/Sidebar/Sidebar";
+import SidebarContainer from "./components/Sidebar/SidebarContainer";
 
 const App = () => {
     return (
@@ -22,7 +22,7 @@ const App = () => {
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
             </div>
-            <Sidebar/>
+            <SidebarContainer/>
         </div>
 
     );
