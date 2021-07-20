@@ -1,12 +1,12 @@
 import s from './Dialogs.module.css'
-import Name from "./Name/Name";
+import NameContainer from "./Name/NameContainer";
 import MessageContainer from "./Message/MessageContainer";
 
 
 const Dialogs = () => {
     return (
         <div className={s.dialogs}>
-            <Name/>
+            <NameContainer/>
             <MessageContainer/>
         </div>
     );

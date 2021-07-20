@@ -3,8 +3,12 @@ import React from "react";
 
 const Sidebar = (props) => {
 
+    const SidebarItem = (props) => {
+        return <div>{props.name}</div>
+    }
+
     let sidebarElement = props.sidebar.map((n) => {
-        return <div>{n.name}</div>
+        return <SidebarItem name={n.name} key={n.id}/>
     });
 
     return (

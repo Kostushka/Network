@@ -15,7 +15,7 @@ const Name = (props) => {
     }
 
     let nameElements = props.name.map((n) => {
-        return <DialogItem name={n.name} id={n.id}/>
+        return <DialogItem name={n.name} id={n.id} key={n.id}/>
     });
 
     let imgElements = props.img.map((n) => {

@@ -9,7 +9,7 @@ const Message = (props) => {
     }
 
     let messageElements = props.message.map((m) => {
-        return <MessageItem message={m.message}/>
+        return <MessageItem message={m.message} key={m.id}/>
     });
 
     let onAddMessage = () => {

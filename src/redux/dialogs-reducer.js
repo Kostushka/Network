@@ -39,23 +39,27 @@ let initialState = {
         {
             id: 6,
             img: 'https://w7.pngwing.com/pngs/559/14/png-transparent-computer-icons-user-personage-heroes-desktop-wallpaper-line.png'
-        },
+        }
     ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'ADD-MESSAGE':
+        case ADD_MESSAGE:
             let newMessage = {
                 id: 6,
                 message: state.newMessageText
             };
-            state.messageData.push(newMessage);
-            state.newMessageText = '';
-            return state;
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessageText = action.newText;
-            return state;
+            return {
+                ...state,
+                messageData: [...state.messageData, newMessage],
+                newMessageText: ''
+            }
+        case UPDATE_NEW_MESSAGE_TEXT:
+            return {
+                ...state,
+                newMessageText: action.newText,
+            }
         default:
             return state;
     }
