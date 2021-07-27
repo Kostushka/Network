@@ -10,6 +10,7 @@ import {Route} from "react-router-dom";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
+                <Route path='/login' render={() => <Login />}/>
             </div>
             <SidebarContainer/>
         </div>
