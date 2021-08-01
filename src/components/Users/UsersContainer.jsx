@@ -56,6 +56,5 @@ export default compose(
         unfollow,
         setCurrentPage,
         getUsers
-    }),
-    withAuthRedirect
+    })
 )(UsersAPIComponent);

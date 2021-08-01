@@ -1,0 +1,13 @@
+.formControlsError input,
+.formControlsError textarea {
+    border: solid 2px red;
+}
+
+.formControlsAlarm {
+    color: red;
+}
+
+.formSummarySubmit {
+    border: solid 2px red;
+    color: firebrick;
+}

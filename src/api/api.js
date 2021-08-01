@@ -20,16 +20,31 @@ export const usersAPI = {
     getDataFollow(id) {
         return instance.post(`follow/${id}`)
             // .then(response => response.data);
-    },
+    }
+}
+
+export const profileAPI = {
     getProfileData(userId) {
         return instance.get(`profile/${userId}`)
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(status) {
+        return instance.put(`profile/status`, {status: status})
     }
 }
 
 export const authAPI = {
     getAuthData() {
         return instance.get(`auth/me`)
-            .then(response => response.data);
+            // .then(response => response.data);
+    },
+    login(email, password, rememberMe) {
+        return instance.post(`auth/login`, {email, password, rememberMe});
+    },
+    logout() {
+        return instance.delete(`auth/login`);
     }
 }
 

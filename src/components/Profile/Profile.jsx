@@ -1,6 +1,6 @@
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostContainer from "./MyPosts/MyPostContainer";
-import {Redirect} from 'react-router-dom';
+
 
 
 
@@ -8,7 +8,7 @@ import {Redirect} from 'react-router-dom';
 const Profile = (props) => {
     return (
         <main>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <MyPostContainer/>
         </main>
     )
