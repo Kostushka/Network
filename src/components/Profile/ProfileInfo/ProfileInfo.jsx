@@ -1,10 +1,10 @@
-import s from './ProfileInfo.module.css'
-import Preloader from "../../common/preloader/preloader";
-import ProfileStatus from './ProfileStatus'
+import s from './ProfileInfo.module.css';
+import Preloader from '../../common/preloader/preloader';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
-        return <Preloader/>
+        return <Preloader/>;
     }
     return (
         <div>
@@ -15,7 +15,10 @@ const ProfileInfo = (props) => {
                 <div>
                     <img src={props.profile.photos.large}/>
                 </div>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks
+                    status={props.status}
+                    updateStatus={props.updateStatus}
+                />
                 <div className={s.descBlock}>
                     <div>{props.profile.fullName}</div>
                     <div>{props.profile.aboutMe}</div>
@@ -34,7 +37,6 @@ const ProfileInfo = (props) => {
                 </div>
             </div>
         </div>
-
     );
-}
+};
 export default ProfileInfo;
