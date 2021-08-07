@@ -28,7 +28,6 @@ class UsersAPIComponent extends React.Component {
     };
 
     render() {
-        console.log('render');
         return (
             <>
                 {this.props.isFetching ? (
@@ -54,7 +53,6 @@ class UsersAPIComponent extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-    console.log('mapStateToProps');
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
