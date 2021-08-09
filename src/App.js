@@ -1,56 +1,76 @@
 import './App.css';
 import Nav from './components/Nav/Nav';
-import UsersContainer from './components/Users/UsersContainer'
-import Dialogs from './components/Dialogs/Dialogs';
-import News from "./components/News/News";
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import {Route, withRouter} from "react-router-dom";
-import SidebarContainer from "./components/Sidebar/SidebarContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
-import {Component} from "react";
-import {connect} from "react-redux";
-import {compose} from "redux";
-import {initializeApp} from "./redux/app-reducer";
-import Preloader from "./components/common/preloader/preloader";
+import UsersContainer from './components/Users/UsersContainer';
+import News from './components/News/News';
+import Music from './components/Music/Music';
+import Settings from './components/Settings/Settings';
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import SidebarContainer from './components/Sidebar/SidebarContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+import Login from './components/Login/Login';
+import { Component } from 'react';
+import { connect, Provider } from 'react-redux';
+import { compose } from 'redux';
+import { initializeApp } from './redux/app-reducer';
+import Preloader from './components/common/preloader/preloader';
+import store from './redux/redux-store';
+import React from 'react';
+const ProfileContainer = React.lazy(() =>
+    import('./components/Profile/ProfileContainer')
+);
+const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 
 class App extends Component {
     componentDidMount() {
         this.props.initializeApp();
     }
     render() {
-        if(!this.props.initialized) {
-            return <Preloader />
+        if (!this.props.initialized) {
+            return <Preloader />;
         }
         return (
             <div className='app-wrapper'>
-                <HeaderContainer/>
-                <Nav/>
+                <HeaderContainer />
+                <Nav />
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <Dialogs/>}/>
-                    <Route path='/profile/:userId?'
-                           render={() => <ProfileContainer/>}/>
-                    <Route path='/users'
-                           render={() => <UsersContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
-                </div>
-                <SidebarContainer/>
-            </div>
+                    <React.Suspense fallback={<div>Загрузка...</div>}>
+                        <Switch>
+                            <Route path='/dialogs' render={() => <Dialogs />} />
+                            <Route
+                                path='/profile/:userId?'
+                                render={() => <ProfileContainer />}
+                            />
+                        </Switch>
+                    </React.Suspense>
 
+                    <Route path='/users' render={() => <UsersContainer />} />
+                    <Route path='/news' render={() => <News />} />
+                    <Route path='/music' render={() => <Music />} />
+                    <Route path='/settings' render={() => <Settings />} />
+                    <Route path='/login' render={() => <Login />} />
+                </div>
+                <SidebarContainer />
+            </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    initialized: state.app.initialized
-})
+    initialized: state.app.initialized,
+});
 
-
-export default compose (
+let AppContainer = compose(
     withRouter,
-    connect(mapStateToProps, {initializeApp}))(App);
+    connect(mapStateToProps, { initializeApp })
+)(App);
+
+const NetworkApp = (props) => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer />
+            </Provider>
+        </BrowserRouter>
+    );
+};
+export default NetworkApp;
