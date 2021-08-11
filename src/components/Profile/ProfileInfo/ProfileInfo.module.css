@@ -6,3 +6,11 @@
     font-weight: bold;
 }
 
+.mainPhoto {
+    max-width: 200px;
+}
+
+.formSummarySubmit {
+    border: solid 2px red;
+    color: firebrick;
+}
