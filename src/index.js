@@ -2,14 +2,9 @@ import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom';
-import NetworkApp from "./App";
+import NetworkApp from './App';
 
-ReactDOM.render(
-    <React.StrictMode>
-        <NetworkApp/>
-    </React.StrictMode>,
-    document.getElementById('root')
-);
+ReactDOM.render(<NetworkApp />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

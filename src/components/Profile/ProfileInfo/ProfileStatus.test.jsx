@@ -14,4 +14,17 @@ describe('ProfileStatus component', () => {
         let span = root.findByType('span');
         expect(span).not.toBeNull();
     });
+    test('after creation <input> should not be displayed', () => {
+        const component = create(<ProfileStatus status='hi' />);
+        const root = component.root;
+        expect(() => {
+            let input = root.findByType('input');
+        }).toThrow();
+    });
+    test('after creation <span> should contains correct status', () => {
+        const component = create(<ProfileStatus status='hi' />);
+        const root = component.root;
+        let span = root.findByType('span');
+        expect(span.children[0]).toBe('hi');
+    });
 });

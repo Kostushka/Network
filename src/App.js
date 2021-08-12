@@ -4,7 +4,13 @@ import UsersContainer from './components/Users/UsersContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/Settings/Settings';
-import { HashRouter, Route, Switch, withRouter } from 'react-router-dom';
+import {
+    BrowserRouter,
+    Redirect,
+    Route,
+    Switch,
+    withRouter,
+} from 'react-router-dom';
 import SidebarContainer from './components/Sidebar/SidebarContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
@@ -21,9 +27,25 @@ const ProfileContainer = React.lazy(() =>
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'));
 
 class App extends Component {
+    catchAllUnhandledErrors = (PromiseRejectionEvent) => {
+        alert('Some error occured');
+    };
+
     componentDidMount() {
         this.props.initializeApp();
+        window.addEventListener(
+            'unhandledrejection',
+            this.catchAllUnhandledErrors
+        );
     }
+
+    componentWillUnmount() {
+        window.removeEventListener(
+            'unhandledrejection',
+            this.catchAllUnhandledErrors
+        );
+    }
+
     render() {
         if (!this.props.initialized) {
             return <Preloader />;
@@ -43,6 +65,11 @@ class App extends Component {
                         </Switch>
                     </React.Suspense>
 
+                    <Route
+                        exact
+                        path='/'
+                        render={() => <Redirect to='/profile' />}
+                    />
                     <Route path='/users' render={() => <UsersContainer />} />
                     <Route path='/news' render={() => <News />} />
                     <Route path='/music' render={() => <Music />} />
@@ -66,11 +93,11 @@ let AppContainer = compose(
 
 const NetworkApp = (props) => {
     return (
-        <HashRouter>
+        <BrowserRouter>
             <Provider store={store}>
                 <AppContainer />
             </Provider>
-        </HashRouter>
+        </BrowserRouter>
     );
 };
 export default NetworkApp;
